@@ -1,5 +1,7 @@
 import { leftList, rightList } from "./numberList.js";
 
+// Part Three -------------------------------------------
+// in mulTask file
 // Part Two ----------------------------------
 
 const similarityScore = (arr1, arr2) => {
