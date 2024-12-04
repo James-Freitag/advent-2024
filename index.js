@@ -1,8 +1,51 @@
 import { leftList, rightList } from "./numberList.js";
+import { allRedNosedReports } from "./safeReports.js";
 
-// Part Three -------------------------------------------
+// Day Three -------------------------------------------
 // in mulTask file
-// Part Two ----------------------------------
+
+// Day Two Part 1 ------------------>>>>
+
+const checkReports = (row) => {
+  const isIncreasing = row[1] > row[0];
+  const isDecreasing = row[1] < row[0];
+
+  for (let i = 1; i < row.length; i++) {
+    const diff = row[i] - row[i - 1];
+
+    if (Math.abs(diff) < 1 || Math.abs(diff) > 3) return false;
+
+    if (isIncreasing && diff <= 0) return false;
+    if (isDecreasing && diff >= 0) return false;
+  }
+  return true;
+};
+
+let safe = 0;
+allRedNosedReports.forEach((row) => {
+  if (checkReports(row)) safe++;
+});
+console.log(safe);
+
+// Day Two Part 2 --------------------------------------------
+safe = 0;
+allRedNosedReports.forEach((row) => {
+  if (checkReports(row)) {
+    safe++;
+    return;
+  } else {
+    for (let i = 0; i < row.length; i++) {
+      const newArr = row.slice(0, i).concat(row.slice(i + 1));
+      if (checkReports(newArr)) {
+        safe++;
+        return;
+      }
+    }
+  }
+});
+console.log(safe);
+
+// Day One Part 2 ----------------------------------
 
 const similarityScore = (arr1, arr2) => {
   const result = [];
@@ -32,9 +75,9 @@ const addScore = () => {
   return sum;
 };
 
-console.log(addScore());
+// console.log(addScore());
 
-// Part One ----------------------------
+// Day One Part 1 ----------------------------
 
 //sort lists
 // let leftSort = leftList.sort((a, b) => a - b);
